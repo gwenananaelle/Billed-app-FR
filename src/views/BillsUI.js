@@ -11,7 +11,7 @@ const row = (bill) => {
     <tr>
       <td>${bill.type}</td>
       <td>${bill.name}</td>
-      <td>${bill.date}</td>
+      <td data-date="${bill.date}">${formatDate(bill.date)}</td>
       <td>${bill.amount} €</td>
       <td>${bill.status}</td>
       <td>
@@ -25,9 +25,6 @@ const rows = (data) => {
   const dataSortedByDate = data.sort(function(a,b){
     return new Date(b.date) - new Date(a.date)
   })
-  // dataSortedByDate.forEach(data => {
-  //   data.date = formatDate(new Date(data.date))
-  // })
   return (dataSortedByDate && dataSortedByDate.length) ? dataSortedByDate.map(bill => row(bill)).join("") : ""
 }
 
