@@ -1,6 +1,8 @@
 import VerticalLayout from './VerticalLayout.js'
 import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
+import { formatDate, formatStatus } from "../app/format.js"
+
 
 import Actions from './Actions.js'
 
@@ -9,7 +11,7 @@ const row = (bill) => {
     <tr>
       <td>${bill.type}</td>
       <td>${bill.name}</td>
-      <td>${bill.date}</td>
+      <td data-date="${bill.date}">${formatDate(bill.date)}</td>
       <td>${bill.amount} €</td>
       <td>${bill.status}</td>
       <td>
@@ -20,7 +22,10 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  const dataSortedByDate = data.sort(function(a,b){
+    return new Date(b.date) - new Date(a.date)
+  })
+  return (dataSortedByDate && dataSortedByDate.length) ? dataSortedByDate.map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
