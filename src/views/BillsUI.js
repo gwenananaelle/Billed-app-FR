@@ -20,10 +20,14 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  const dataSortedByDate = data.sort(function(a,b){
-    return new Date(b.date) - new Date(a.date)
-  })
-  return (dataSortedByDate && dataSortedByDate.length) ? dataSortedByDate.map(bill => row(bill)).join("") : ""
+  if (data && data.length) {
+    const dataSortedByDate = data.sort(function(a,b){
+      return new Date(b.date) - new Date(a.date)
+    })
+    return dataSortedByDate.map(bill => row(bill)).join("")
+  } else {
+    return ""
+  }
 }
 
 export const modal = () => (`
