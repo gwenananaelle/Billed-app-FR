@@ -19,7 +19,7 @@ describe('Given I am connected as an Admin', () => {
   describe('When I am on Dashboard page, there are bills, and there is one accepted', () => {
     test('Then, filteredBills by accepted status should return 1 bill', () => {
       const filtered_bills = filteredBills(bills, "accepted")
-      expect(filtered_bills.length).toBe(1)
+      expect(filtered_bills.length).toBe(2)
     })
   })
   describe('When I am on Dashboard page, there are bills, and there is two refused', () => {
@@ -190,14 +190,15 @@ describe('Given I am connected as Admin and I am on Dashboard page and I clicked
       const dashboard = new Dashboard({
         document, onNavigate, firestore, bills, localStorage: window.localStorage
       })
-
+      const modale = screen.queryByTestId('modaleFileAdmin')
+      const modalShow = jest.fn()
+      $.fn.modal = modalShow
       const handleClickIconEye = jest.fn(dashboard.handleClickIconEye)
       const eye = screen.getByTestId('icon-eye-d')
       eye.addEventListener('click', handleClickIconEye)
       userEvent.click(eye)
       expect(handleClickIconEye).toHaveBeenCalled()
-
-      const modale = screen.getByTestId('modaleFileAdmin')
+      expect(modalShow).toHaveBeenCalled()
       expect(modale).toBeTruthy()
     })
   })

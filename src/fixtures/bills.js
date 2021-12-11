@@ -57,5 +57,20 @@ export const bills = [{
   "commentary": "test2",
   "type": "Restaurants et bars",
   "fileUrl": "https://firebasestorage.googleapis.com/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=4df6ed2c-12c8-42a2-b013-346c1346f732"
+},
+{       
+  "id": "jJQBCnkphTj2q4FTDUBS",
+  "status": "accepted",
+  "pct": 20,
+  "amount": 200,
+  "email": "john.doe@email.com",
+  "name": "this is a name",
+  "vat": "40",
+  "fileName": "preview-facture-free-201801-pdf-1.jpg",
+  "date": "2002-02-02",
+  "commentAdmin": "this is a commentary",
+  "commentary": "this is another commentary",
+  "type": "Restaurants et bars",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=4df6ed2c-12c8-42a2-b013-346c1346f732"
 }
 ]

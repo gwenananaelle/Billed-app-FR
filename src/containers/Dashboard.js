@@ -12,6 +12,7 @@ export const filteredBills = (data, status) => {
       let selectCondition
 
       // in jest environment
+      /* istanbul ignore else */
       if (typeof jest !== 'undefined') {
         selectCondition = (bill.status === status)
       } else {
@@ -82,6 +83,7 @@ export default class {
     const billUrl = $('#icon-eye-d').attr("data-bill-url")
     const imgWidth = Math.floor($('#modaleFileAdmin1').width() * 0.8)
     $('#modaleFileAdmin1').find(".modal-body").html(`<div style='text-align: center;'><img width=${imgWidth} src=${billUrl} /></div>`)
+    /* istanbul ignore else */
     if (typeof $('#modaleFileAdmin1').modal === 'function') $('#modaleFileAdmin1').modal('show')
   }
 
