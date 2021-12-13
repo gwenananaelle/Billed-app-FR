@@ -131,7 +131,7 @@ describe("Given I am connected as an employee", () => {
     })
   })
 })
-describe("Given I am a user connected as an employee", () => {
+describe("Given I am a user connected as an admin", () => {
   describe("When I am on Bills Page", () => {
     test("fetches bills from mock API GET", async () => {
       const getSpy = jest.spyOn(firebase, "get")

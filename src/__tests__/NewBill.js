@@ -2,6 +2,7 @@ import { screen } from "@testing-library/dom"
 import userEvent from '@testing-library/user-event'
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
+import firebase from "../__mocks__/firebase"
 import { ROUTES } from "../constants/routes"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 
@@ -101,5 +102,14 @@ describe("Given I am connected as an employee", () => {
         expect(screen.getAllByText('Mes notes de frais')).toBeTruthy() 
       })
     })
+  })
+})
+describe("Given I am a user connected as an employee", () => {
+  describe("When I am on Bills Page", () => {
+    test("post bill with API POST", async () => {
+      const getSpy = jest.spyOn(firebase, "post")
+      firebase.post({bill:"bill"});
+      expect(getSpy).toHaveBeenCalledTimes(1)
+   })
   })
 })
