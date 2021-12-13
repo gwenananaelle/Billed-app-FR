@@ -13,9 +13,18 @@ describe("Given I am connected as an employee", () => {
         const html = NewBillUI()
         document.body.innerHTML = html
 
+        const onNavigate = (pathname) => {
+          document.body.innerHTML = ROUTES({ pathname })
+        }
+        Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+        window.localStorage.setItem('user', JSON.stringify({
+          type: "Employee",
+        }))
+        const sampleNewBills = new NewBill({ document, onNavigate, firestore: null, localStorage: window.localStorage })  
+
         const file = new File(['hello'], 'hello.png', {type: 'image/png'})
         const input = screen.getByTestId("file")
-        const handleChangeFile = jest.fn()
+        const handleChangeFile = jest.spyOn(sampleNewBills, 'handleChangeFile');
         input.addEventListener("change", handleChangeFile)
         userEvent.upload(input, file)
 
@@ -89,7 +98,7 @@ describe("Given I am connected as an employee", () => {
             vat: expect.anything(),
           }),
         );
-        expect(screen.getAllByText('Mes notes de frais')).toBeTruthy()
+        expect(screen.getAllByText('Mes notes de frais')).toBeTruthy() 
       })
     })
   })

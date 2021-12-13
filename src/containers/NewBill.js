@@ -19,7 +19,8 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
-    this.firestore
+    /* istanbul ignore next */
+    this.firestore && this.firestore
       .storage
       .ref(`justificatifs/${fileName}`)
       .put(file)
