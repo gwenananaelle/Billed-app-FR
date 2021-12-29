@@ -38,21 +38,23 @@ describe("Given I am connected as an employee", () => {
     })
 
     describe("When I submit a new bill without filling the form", () => {
-      const html = NewBillUI()
-      document.body.innerHTML = html
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({ pathname })
-      }
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-      window.localStorage.setItem('user', JSON.stringify({
-        type: "Employee",
-        email: "thomas@facadia.com"
-      }))
-      const sampleNewBills = new NewBill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
-      sampleNewBills.handleSubmit = jest.fn()
-      const submit = screen.getByRole("button", { name: 'Envoyer' })
-      userEvent.click(submit)
-      expect(sampleNewBills.handleSubmit).not.toHaveBeenCalled()
+      test("Then the new bill should not be created and I should stay on the form", () => {
+        const html = NewBillUI()
+        document.body.innerHTML = html
+        const onNavigate = (pathname) => {
+          document.body.innerHTML = ROUTES({ pathname })
+        }
+        Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+        window.localStorage.setItem('user', JSON.stringify({
+          type: "Employee",
+          email: "thomas@facadia.com"
+        }))
+        const sampleNewBills = new NewBill({ document, onNavigate, firestore: null, localStorage: window.localStorage })
+        sampleNewBills.handleSubmit = jest.fn()
+        const submit = screen.getByRole("button", { name: 'Envoyer' })
+        userEvent.click(submit)
+        expect(sampleNewBills.handleSubmit).not.toHaveBeenCalled()
+      })
     })
 
     describe("When I submit a new bill with datas", () => {
